@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Download, ChevronDown } from 'lucide-react';
 import TypingAnimation from './TypingAnimation';
 import DNAAnimation from './DNAAnimation';
-import profileImage from '@/assets/hariharan-profile.jpg';
 
 const Hero = () => {
   const skills = ['Java', 'SpringBoot', 'MySQL', 'Spring MVC', 'HTML', 'CSS', 'Bootstrap', 'JavaScript'];
@@ -39,19 +38,6 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          {/* Profile Image */}
-          <div className="mb-8 animate-scale-in">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent animate-pulse-glow"></div>
-              <img 
-                src={profileImage} 
-                alt="Hariharan - Java Full Stack Developer"
-                className="relative w-full h-full rounded-full object-cover border-4 border-background shadow-2xl hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute -inset-2 rounded-full border-2 border-primary/30 animate-pulse"></div>
-            </div>
-          </div>
-
           {/* Greeting */}
           <p className="text-lg text-muted-foreground mb-4 animate-fade-in">Hello, I'm</p>
           

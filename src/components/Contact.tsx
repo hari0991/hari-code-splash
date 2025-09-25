@@ -123,48 +123,41 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Call to Action */}
+            {/* Quick Actions */}
             <div className="animate-slide-in-right">
-              <Card className="bg-card-gradient border-border p-8 text-center">
-                <div className="space-y-6">
-                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Send className="text-primary" size={32} />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-2xl font-semibold mb-4">Ready to Connect?</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      I'm excited about the possibility of contributing to your team and bringing 
-                      my passion for Java Full Stack development to your next project.
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <Button 
-                      size="lg" 
-                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                      asChild
-                    >
-                      <a href="mailto:pharikaran0111@gmail.com" className="flex items-center justify-center gap-2">
-                        <Mail size={20} />
-                        Send Email
-                      </a>
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      size="lg" 
-                      className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                      asChild
-                    >
-                      <a href="tel:+918524048993" className="flex items-center justify-center gap-2">
-                        <Phone size={20} />
-                        Call Now
-                      </a>
-                    </Button>
-                  </div>
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h3 className="text-2xl font-semibold mb-4 text-primary">Let's Connect</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    Feel free to reach out through any of these channels. I'll get back to you as soon as possible!
+                  </p>
                 </div>
-              </Card>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground h-14"
+                    asChild
+                  >
+                    <a href="mailto:pharikaran0111@gmail.com" className="flex items-center justify-center gap-2">
+                      <Mail size={20} />
+                      Send Email
+                    </a>
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground h-14"
+                    asChild
+                  >
+                    <a href="tel:+918524048993" className="flex items-center justify-center gap-2">
+                      <Phone size={20} />
+                      Call Now
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

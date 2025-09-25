@@ -19,128 +19,147 @@ const DNAAnimation = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // DNA Animation variables
+    // Detect theme
+    const isDarkMode = () => document.documentElement.classList.contains('dark');
+
+    // Animation variables
     let animationId: number;
     let time = 0;
 
-    // DNA structure parameters
-    const helixRadius = 80;
-    const helixHeight = canvas.height;
-    const helixSpeed = 0.02;
-    const particleCount = 60;
-    
-    // Create DNA particles
-    class DNAParticle {
-      constructor(
-        public index: number,
-        public strand: 'left' | 'right'
-      ) {}
-
-      draw(ctx: CanvasRenderingContext2D, time: number) {
-        const progress = (this.index / particleCount) * Math.PI * 8;
-        const yOffset = (this.index / particleCount) * helixHeight;
-        
-        // Calculate helix positions
-        const angle = progress + time * helixSpeed;
-        const x = canvas.width / 2 + Math.cos(angle) * helixRadius * (this.strand === 'left' ? 1 : -1);
-        const y = yOffset + Math.sin(time * 0.5) * 20;
-        
-        // Color gradient based on position
-        const hue = (this.index / particleCount) * 360 + time * 20;
-        const alpha = 0.6 + Math.sin(time + this.index) * 0.3;
-        
-        // Draw particle
-        ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = `hsl(${hue}, 70%, 60%)`;
-        
-        ctx.beginPath();
-        ctx.arc(x, y % helixHeight, 3, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Draw connecting lines between strands
-        if (this.strand === 'left') {
-          const rightX = canvas.width / 2 + Math.cos(angle) * helixRadius * -1;
-          ctx.strokeStyle = `hsl(${hue}, 50%, 40%)`;
-          ctx.lineWidth = 1;
-          ctx.globalAlpha = alpha * 0.5;
-          ctx.beginPath();
-          ctx.moveTo(x, y % helixHeight);
-          ctx.lineTo(rightX, y % helixHeight);
-          ctx.stroke();
-        }
-        
-        ctx.restore();
-      }
-    }
-
-    // Create particles
-    const particles: DNAParticle[] = [];
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new DNAParticle(i, 'left'));
-      particles.push(new DNAParticle(i, 'right'));
-    }
-
-    // Floating particles
-    class FloatingParticle {
+    // Geometric particles
+    class GeometricParticle {
       constructor(
         public x: number = Math.random() * canvas.width,
         public y: number = Math.random() * canvas.height,
-        public vx: number = (Math.random() - 0.5) * 0.5,
-        public vy: number = (Math.random() - 0.5) * 0.5,
-        public size: number = Math.random() * 2 + 1,
-        public hue: number = Math.random() * 360
+        public vx: number = (Math.random() - 0.5) * 0.3,
+        public vy: number = (Math.random() - 0.5) * 0.3,
+        public size: number = Math.random() * 3 + 1,
+        public rotation: number = Math.random() * Math.PI * 2,
+        public rotationSpeed: number = (Math.random() - 0.5) * 0.02
       ) {}
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
+        this.rotation += this.rotationSpeed;
         
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        // Wrap around screen
+        if (this.x < -50) this.x = canvas.width + 50;
+        if (this.x > canvas.width + 50) this.x = -50;
+        if (this.y < -50) this.y = canvas.height + 50;
+        if (this.y > canvas.height + 50) this.y = -50;
       }
 
       draw(ctx: CanvasRenderingContext2D, time: number) {
-        const alpha = 0.3 + Math.sin(time * 0.005 + this.x * 0.01) * 0.2;
+        const dark = isDarkMode();
+        const alpha = 0.1 + Math.sin(time * 0.01 + this.x * 0.001) * 0.05;
         
         ctx.save();
         ctx.globalAlpha = alpha;
-        ctx.fillStyle = `hsl(${this.hue + time * 0.5}, 60%, 70%)`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = `hsl(${this.hue + time * 0.5}, 60%, 70%)`;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
         
+        // Theme-aware colors
+        if (dark) {
+          ctx.strokeStyle = `hsl(217, 91%, 60%)`;
+        } else {
+          ctx.strokeStyle = `hsl(217, 91%, 50%)`;
+        }
+        
+        ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        
+        // Draw geometric shape (hexagon)
+        for (let i = 0; i < 6; i++) {
+          const angle = (i / 6) * Math.PI * 2;
+          const x = Math.cos(angle) * this.size;
+          const y = Math.sin(angle) * this.size;
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+        ctx.stroke();
+        
         ctx.restore();
       }
     }
 
-    // Create floating particles
-    const floatingParticles: FloatingParticle[] = [];
-    for (let i = 0; i < 30; i++) {
-      floatingParticles.push(new FloatingParticle());
+    // Connection lines
+    class ConnectionLine {
+      constructor(
+        public startX: number,
+        public startY: number,
+        public endX: number,
+        public endY: number,
+        public alpha: number = 0.1
+      ) {}
+
+      draw(ctx: CanvasRenderingContext2D) {
+        const dark = isDarkMode();
+        
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.strokeStyle = dark ? `hsl(217, 91%, 60%)` : `hsl(217, 91%, 50%)`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(this.startX, this.startY);
+        ctx.lineTo(this.endX, this.endY);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    // Create particles
+    const particles: GeometricParticle[] = [];
+    for (let i = 0; i < 25; i++) {
+      particles.push(new GeometricParticle());
     }
 
     // Animation loop
     const animate = () => {
       time++;
       
-      // Clear canvas with fade effect
-      ctx.fillStyle = 'rgba(10, 10, 15, 0.1)';
+      // Clear canvas - theme aware
+      const dark = isDarkMode();
+      if (dark) {
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.02)';
+      } else {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      }
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      // Draw DNA helix
+      // Update and draw particles
       particles.forEach(particle => {
+        particle.update();
         particle.draw(ctx, time);
       });
       
-      // Draw floating particles
-      floatingParticles.forEach(particle => {
-        particle.update();
-        particle.draw(ctx, time);
+      // Draw connections between nearby particles
+      const connections: ConnectionLine[] = [];
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 150) {
+            const alpha = (1 - distance / 150) * 0.05;
+            connections.push(new ConnectionLine(
+              particles[i].x,
+              particles[i].y,
+              particles[j].x,
+              particles[j].y,
+              alpha
+            ));
+          }
+        }
+      }
+      
+      connections.forEach(connection => {
+        connection.draw(ctx);
       });
       
       animationId = requestAnimationFrame(animate);
@@ -159,7 +178,7 @@ const DNAAnimation = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full opacity-30"
+      className="absolute inset-0 w-full h-full opacity-20"
       style={{ pointerEvents: 'none' }}
     />
   );

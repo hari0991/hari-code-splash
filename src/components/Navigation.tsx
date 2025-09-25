@@ -75,7 +75,7 @@ const Navigation = () => {
           {/* Social Links & Theme Toggle */}
           <div className="hidden md:flex items-center space-x-4">
             <a
-              href="https://github.com/hariharan"
+              href="https://github.com/hari0991"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors p-2"
@@ -83,7 +83,7 @@ const Navigation = () => {
               <Github size={20} />
             </a>
             <a
-              href="https://linkedin.com/in/hariharan"
+              href="https://www.linkedin.com/in/hariharan-in"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors p-2"
@@ -125,7 +125,7 @@ const Navigation = () => {
             ))}
             <div className="flex space-x-4 px-3 py-2">
               <a
-                href="https://github.com/hariharan"
+                href="https://github.com/hari0991"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors p-2"
@@ -133,7 +133,7 @@ const Navigation = () => {
                 <Github size={20} />
               </a>
               <a
-                href="https://linkedin.com/in/hariharan"
+                href="https://www.linkedin.com/in/hariharan-in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors p-2"

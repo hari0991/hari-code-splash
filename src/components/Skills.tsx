@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Code, Database, Globe, Server } from 'lucide-react';
+import { Code, Database, Globe, Server, Coffee, Braces, FileText, Palette, 
+         Layout, Leaf, Settings, Activity, TrendingUp } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -8,36 +9,36 @@ const Skills = () => {
       icon: <Code className="text-primary" size={24} />,
       title: "Languages",
       skills: [
-        { name: "Java", level: 85, color: "bg-orange-500" },
-        { name: "JavaScript", level: 75, color: "bg-yellow-500" },
-        { name: "SQL", level: 70, color: "bg-blue-500" }
+        { name: "Java", level: 85, color: "bg-orange-500", icon: <Coffee size={18} /> },
+        { name: "JavaScript", level: 75, color: "bg-yellow-500", icon: <Braces size={18} /> },
+        { name: "SQL", level: 70, color: "bg-blue-500", icon: <Database size={18} /> }
       ]
     },
     {
       icon: <Globe className="text-primary" size={24} />,
       title: "Frontend",
       skills: [
-        { name: "HTML", level: 90, color: "bg-red-500" },
-        { name: "CSS", level: 85, color: "bg-blue-600" },
-        { name: "Bootstrap", level: 80, color: "bg-purple-500" }
+        { name: "HTML", level: 90, color: "bg-red-500", icon: <FileText size={18} /> },
+        { name: "CSS", level: 85, color: "bg-blue-600", icon: <Palette size={18} /> },
+        { name: "Bootstrap", level: 80, color: "bg-purple-500", icon: <Layout size={18} /> }
       ]
     },
     {
       icon: <Server className="text-primary" size={24} />,
       title: "Backend",
       skills: [
-        { name: "Spring Boot", level: 80, color: "bg-green-500" },
-        { name: "Spring MVC", level: 75, color: "bg-green-600" },
-        { name: "RESTful APIs", level: 70, color: "bg-indigo-500" }
+        { name: "Spring Boot", level: 80, color: "bg-green-500", icon: <Leaf size={18} /> },
+        { name: "Spring MVC", level: 75, color: "bg-green-600", icon: <Settings size={18} /> },
+        { name: "RESTful APIs", level: 70, color: "bg-indigo-500", icon: <Activity size={18} /> }
       ]
     },
     {
       icon: <Database className="text-primary" size={24} />,
       title: "Database",
       skills: [
-        { name: "MySQL", level: 80, color: "bg-blue-400" },
-        { name: "Database Design", level: 70, color: "bg-teal-500" },
-        { name: "Query Optimization", level: 65, color: "bg-cyan-500" }
+        { name: "MySQL", level: 80, color: "bg-blue-400", icon: <Database size={18} /> },
+        { name: "Database Design", level: 70, color: "bg-teal-500", icon: <Database size={18} /> },
+        { name: "Query Optimization", level: 65, color: "bg-cyan-500", icon: <TrendingUp size={18} /> }
       ]
     }
   ];
@@ -82,7 +83,12 @@ const Skills = () => {
                   {category.skills.map((skill, skillIndex) => (
                     <div key={skillIndex} className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">{skill.name}</span>
+                        <div className="flex items-center gap-2">
+                          <div className="text-primary">
+                            {skill.icon}
+                          </div>
+                          <span className="font-medium">{skill.name}</span>
+                        </div>
                         <span className="text-sm text-muted-foreground">{skill.level}%</span>
                       </div>
                       <Progress 

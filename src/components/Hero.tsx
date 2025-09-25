@@ -7,11 +7,13 @@ const Hero = () => {
   const skills = ['Java', 'SpringBoot', 'MySQL', 'Spring MVC', 'HTML', 'CSS', 'Bootstrap', 'JavaScript'];
 
   const handleDownloadResume = () => {
-    // In a real implementation, this would download the actual resume
     const link = document.createElement('a');
-    link.href = '/resume.pdf'; // You would place the actual PDF in the public folder
+    link.href = 'https://drive.google.com/uc?export=download&id=1hEDZ1uI-0TCn14jsywSYJ0AuGYtt4A-G';
     link.download = 'Hariharan_Resume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   const scrollToAbout = () => {

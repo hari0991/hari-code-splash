@@ -16,7 +16,7 @@ const Projects = () => {
         "Responsive dashboard with charts",
         "CRUD operations for expense management"
       ],
-      githubLink: "https://github.com/hariharan/expense-tracker",
+      githubLink: "https://github.com/hari0991/ExpenceTracker/tree/main/SmartSpendExpense",
       liveDemo: "#"
     },
     {
@@ -30,7 +30,7 @@ const Projects = () => {
         "Payment gateway integration",
         "Admin dashboard for theaters"
       ],
-      githubLink: "https://github.com/hariharan/movie-booking",
+      githubLink: "https://github.com/hari0991/MovieBooking",
       liveDemo: "#"
     }
   ];
@@ -158,7 +158,7 @@ const Projects = () => {
               asChild
             >
               <a 
-                href="https://github.com/hariharan" 
+                href="https://github.com/hari0991" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"

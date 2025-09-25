@@ -1,17 +1,15 @@
-import { Github, Linkedin, Heart } from 'lucide-react';
+import { Github, Linkedin } from 'lucide-react';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   const socialLinks = [
     {
       icon: <Github size={20} />,
-      url: "https://github.com/hariharan",
+      url: "https://github.com/hari0991",
       label: "GitHub"
     },
     {
       icon: <Linkedin size={20} />,
-      url: "https://linkedin.com/in/hariharan",
+      url: "https://www.linkedin.com/in/hariharan-in",
       label: "LinkedIn"
     }
   ];
@@ -91,17 +89,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Bottom Section */}
-          <div className="border-t border-border mt-8 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-muted-foreground text-sm flex items-center gap-2">
-                © {currentYear} Hariharan. Made with <Heart className="text-red-500" size={16} /> and passion.
-              </p>
-              <p className="text-muted-foreground text-sm">
-                Built with React, TypeScript & Tailwind CSS
-              </p>
-            </div>
-          </div>
+          {/* Bottom Section removed as requested */}
         </div>
       </div>
     </footer>

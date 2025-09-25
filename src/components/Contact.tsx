@@ -28,13 +28,13 @@ const Contact = () => {
     {
       icon: <Github size={24} />,
       label: "GitHub",
-      url: "https://github.com/hariharan",
+      url: "https://github.com/hari0991",
       color: "hover:text-gray-400"
     },
     {
       icon: <Linkedin size={24} />,
       label: "LinkedIn",
-      url: "https://linkedin.com/in/hariharan",
+      url: "https://www.linkedin.com/in/hariharan-in",
       color: "hover:text-blue-400"
     }
   ];
@@ -123,41 +123,9 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Quick Actions */}
+            {/* Blank space */}
             <div className="animate-slide-in-right">
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h3 className="text-2xl font-semibold mb-4 text-primary">Let's Connect</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Feel free to reach out through any of these channels. I'll get back to you as soon as possible!
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Button 
-                    size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground h-14"
-                    asChild
-                  >
-                    <a href="mailto:pharikaran0111@gmail.com" className="flex items-center justify-center gap-2">
-                      <Mail size={20} />
-                      Send Email
-                    </a>
-                  </Button>
-                  
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground h-14"
-                    asChild
-                  >
-                    <a href="tel:+918524048993" className="flex items-center justify-center gap-2">
-                      <Phone size={20} />
-                      Call Now
-                    </a>
-                  </Button>
-                </div>
-              </div>
+              {/* Intentionally left blank */}
             </div>
           </div>
         </div>

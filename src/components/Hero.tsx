@@ -8,7 +8,7 @@ const Hero = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = 'https://drive.google.com/uc?export=download&id=1hEDZ1uI-0TCn14jsywSYJ0AuGYtt4A-G';
+    link.href = 'https://drive.google.com/uc?export=download&id=1CiXGivDGNefajBe5uuiTT2USPyz2XjiC';
     link.download = 'Hariharan_Resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
